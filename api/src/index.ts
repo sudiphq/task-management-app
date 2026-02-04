@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 
 import config from "./config";
 import authRoutes from "./routes/auth";
+import tasksRoutes from "./routes/tasks";
 import { errorMiddleware } from "./middlewares/error";
 
 const app = express();
@@ -24,6 +25,7 @@ app.get("/", (_, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/tasks", tasksRoutes);
 
 const server = http.createServer(app);
 

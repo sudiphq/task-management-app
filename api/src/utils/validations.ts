@@ -13,3 +13,23 @@ export const loginSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+
+export const createTaskSchema = z.object({
+  title: z.string({ message: "Title is required" }).min(1, "Title is required").max(255),
+});
+
+export const updateTaskSchema = z.object({
+  title: z.string().min(1, "Title cannot be empty").max(255).optional(),
+  status: z.enum(["pending", "done"]).optional(),
+});
+
+export const taskQuerySchema = z.object({
+  page: z.coerce.number().int().positive().default(1),
+  limit: z.coerce.number().int().positive().max(100).default(10),
+  status: z.enum(["pending", "done"]).optional(),
+  search: z.string().optional(),
+});
+
+export type CreateTaskInput = z.infer<typeof createTaskSchema>;
+export type UpdateTaskInput = z.infer<typeof updateTaskSchema>;
+export type TaskQueryInput = z.infer<typeof taskQuerySchema>;
