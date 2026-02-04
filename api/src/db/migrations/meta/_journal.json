@@ -8,6 +8,13 @@
       "when": 1770227246972,
       "tag": "0000_secret_hex",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1770228573172,
+      "tag": "0001_damp_lord_hawal",
+      "breakpoints": true
     }
   ]
 }
