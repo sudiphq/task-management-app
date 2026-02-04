@@ -3,3 +3,4 @@ web/node_modules
 api/dist
 api/.env
 web/.env.local
+web/.next

@@ -17,7 +17,7 @@ export const authMiddleware = (
   const accessToken = req.cookies.access_token;
 
   if (!accessToken) {
-    return res.status(401).json({ error: "Access token not found" });
+    return res.status(401).json({ error: "Unauthorized" });
   }
 
   try {

@@ -12,6 +12,7 @@ import { db } from "../db";
 import { users } from "../db/schema";
 import config from "../config";
 import { registerSchema, loginSchema } from "../utils/validations";
+import { authMiddleware } from "../middlewares/auth";
 
 const router = Router();
 
@@ -144,6 +145,22 @@ router.post("/refresh", (req, res) => {
   } catch {
     return res.status(401).json({ error: "Invalid or expired refresh token" });
   }
+});
+
+router.get("/me", authMiddleware, async (req, res) => {
+  const user = await db.query.users.findFirst({
+    where: eq(users.id, req.userId!)
+  });
+
+  if (!user) {
+    res.clearCookie("access_token", config.COOKIE_OPTIONS);
+    res.clearCookie("refresh_token", config.COOKIE_OPTIONS);
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const { password: _, ...userWithoutPassword } = user;
+
+  return res.json({ user: userWithoutPassword });
 });
 
 export default router;
