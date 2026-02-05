@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { AuthProvider } from "@/context/auth";
+import { AppProviders } from "@/context/app-providers";
 import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
@@ -35,7 +35,7 @@ export default function RootLayout({
           "font-sans antialiased"
         )}
       >
-        <AuthProvider>{children}</AuthProvider>
+        <AppProviders>{children}</AppProviders>
         <Toaster richColors />
       </body>
     </html>
