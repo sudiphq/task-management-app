@@ -1,4 +1,5 @@
 import "dotenv/config";
+import { CookieOptions } from "express";
 import { z } from "zod";
 
 const envSchema = z.object({
@@ -9,6 +10,14 @@ const envSchema = z.object({
   JWT_ACCESS_SECRET: z.string().min(1, "JWT_ACCESS_SECRET is required"),
   JWT_REFRESH_SECRET: z.string().min(1, "JWT_REFRESH_SECRET is required"),
 });
+
+type Env = z.infer<typeof envSchema>;
+
+export type Config = Env & {
+  ACCESS_TOKEN_EXPIRES_IN: number;
+  REFRESH_TOKEN_EXPIRES_IN: number;
+  COOKIE_OPTIONS: CookieOptions;
+};
 
 const parseEnv = () => {
   const result = envSchema.safeParse(process.env);
@@ -22,7 +31,7 @@ const parseEnv = () => {
   return result.data;
 };
 
-const getConfig = () => {
+const getConfig = (): Config => {
   const env = parseEnv();
 
   return {
@@ -34,6 +43,9 @@ const getConfig = () => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax" as const,
       path: "/",
+      ...(env.NODE_ENV === "production"
+        ? { domain: ".sudipbiswas.dev" }
+        : undefined),
     },
   };
 };
