@@ -4,8 +4,8 @@ A full-stack task management application with user authentication, built with Ne
 
 ## Live Demo
 
-- **Web App**: [https://task-management-app-drab-ten.vercel.app](https://task-management-app-drab-ten.vercel.app)
-- **API**: [https://task-management-app-production-0de9.up.railway.app](https://task-management-app-production-0de9.up.railway.app)
+- **Web App**: [https://task-management.sudipbiswas.dev](https://task-management.sudipbiswas.dev)
+- **API**: [https://task-management-api.sudipbiswas.dev](https://task-management-api.sudipbiswas.dev)
 
 ## Tech Stack
 
