@@ -41,7 +41,7 @@ const getConfig = (): Config => {
     COOKIE_OPTIONS: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "lax" as const,
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
       path: "/",
       ...(env.NODE_ENV === "production"
         ? { domain: ".sudipbiswas.dev" }
